@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+    <head>
+        <meta charset="utf-8">
+        <title>Serial7</title>
+        <meta name="description" content="專注力測驗">
+        <link rel="icon" type="image/png" href="images/fall.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
+        <link href="css/Serial7_style.css" rel="stylesheet">
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Ojuju:wght@200..800&display=swap" rel="stylesheet">
+		
+		<link href="https://fonts.cdnfonts.com/css/seven-segment" rel="stylesheet">
+    </head>
+
+    <body class="game-big-bg">
+		<div class="go_back" id="go_back">
+			<h2>Back</h2>
+		</div>
+		<script>
+			let go_back = document.getElementById("go_back");
+			go_back.addEventListener("touchstart", e => {
+			  e.preventDefault();
+			  console.log("touchstart event!");
+			});
+			
+			go_back.addEventListener("touchend", e => {
+			  e.preventDefault();
+			  console.log("touchend event!");
+			  location.assign("Serial7_index.html");
+			});
+		</script>
+		
+		<div id="timer">
+			<h2>02:00</h2>
+		</div>
+		<script>
+			let timer = document.getElementById("timer");
+			
+			let total_time = 120;
+			let left_time = total_time;
+			
+			let intervalID = setInterval(() => {
+				if(left_time == 0) {
+					let result = 
+					"答對題數 : " + ccorrect + "\n" + 
+					"答錯題數 : " + cerror + "\n" + 
+					"總分 : " + cscore;
+					
+					window.alert(result);
+					clearInterval(intervalID);
+					location.assign("Serial7_index.html");
+				}else {
+					left_time --;
+					let min = parseInt(left_time/60);
+					let sec = left_time - 60 * min;
+				    
+				    let x = sec < 10 ? '0' : '';
+				    
+				    timer.innerHTML = '\n\t\t\t\t<h2>0' + min + ':' + x + sec + '</h2>\n\t\t\t';
+				}
+			}, 1000);
+		</script>
+		
+		<div id="block_frame">
+			<div id="block_01">
+				<h2></h2>
+			</div>
+			
+	        <div id="block_02">
+				<h2></h2>
+			</div>
+			
+	        <div id="block_03">
+				<h2></h2>
+			</div>
+			
+	        <div id="block_04">
+				<h2></h2>
+			</div>
+			
+	        <div id="block_05">
+				<h2></h2>
+			</div>
+			
+	        <div id="block_06">
+				<h2></h2>
+			</div>
+			
+	        <div id="block_07">
+				<h2></h2>
+			</div>
+			
+	        <div id="block_08">
+				<h2></h2>
+			</div>
+			
+	        <div id="block_09">
+				<h2></h2>
+			</div>
+		</div>
+		
+		<div id="score">
+			<h2>Score : 0</h2>
+		</div>
+		
+		<div id="correct">
+			<h2>Correct : 0</h2>
+		</div>
+		
+		<div id="error">
+			<h2>Error : 0</h2>
+		</div>
+		
+		<script>
+			let score = document.getElementById("score");
+			let correct = document.getElementById("correct");
+			let error = document.getElementById("error");
+			
+			score.addEventListener("touchstart", e => {
+			  e.preventDefault();
+			  console.log("touchstart event!");
+			});
+			
+			correct.addEventListener("touchstart", e => {
+			  e.preventDefault();
+			  console.log("touchstart event!");
+			});
+			
+			error.addEventListener("touchstart", e => {
+			  e.preventDefault();
+			  console.log("touchstart event!");
+			});
+			
+			timer.addEventListener("touchstart", e => {
+			  e.preventDefault();
+			  console.log("touchstart event!");
+			});
+			
+			let initial_num = parseInt(Math.random()*8000) + 2000;
+			let correct_num = initial_num;
+			
+			let cscore = 0;
+			let ccorrect = 0;
+			let cerror = 0;
+			
+			let block_01 = document.getElementById("block_01");
+			let block_02 = document.getElementById("block_02");
+			let block_03 = document.getElementById("block_03");
+			let block_04 = document.getElementById("block_04");
+			let block_05 = document.getElementById("block_05");
+			let block_06 = document.getElementById("block_06");
+			let block_07 = document.getElementById("block_07");
+			let block_08 = document.getElementById("block_08");
+			let block_09 = document.getElementById("block_09");
+			
+			let blocks = [block_01, block_02, block_03, block_04, block_05, block_06, block_07, block_08, block_09];
+			
+			block_01.addEventListener("touchstart", e => {
+			  e.preventDefault();
+			  console.log("touchstart event!");
+			});
+			block_01.addEventListener("touchend", e => {
+			  e.preventDefault();
+			  console.log("touchend event!");
+			  if(block_01.innerText == correct_num) {
+				cscore += 5;
+				ccorrect += 1;
+				cerror += 0;
+				
+				score.innerHTML = '\n\t\t\t\t<h2>Score : ' + cscore + '</h2>\n\t\t\t';
+				correct.innerHTML = '\n\t\t\t\t<h2>Correct : ' + ccorrect + '</h2>\n\t\t\t';
+				error.innerHTML = '\n\t\t\t\t<h2>Error : ' + cerror + '</h2>\n\t\t\t';
+				
+				correct_num = correct_num - 7;
+				shuffle(blocks);
+				  
+				blocks[0].innerHTML = '\n\t\t\t\t<h2>' + correct_num + '</h2>\n\t\t\t';
+				  
+				let d4 = correct_num.toString()[0];
+				let d3 = correct_num.toString()[1];
+				let d2 = correct_num.toString()[2];
+				let d1 = correct_num.toString()[3];
+				
+				let id = 1;
+
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 + 
+							similar[parseInt(d2)][i] +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							similar[parseInt(d3)][i] +
+							d2 +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 2; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 +
+							similar[parseInt(d2)][i] +
+							similar[parseInt(d1)][i] +
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+			}else {
+				cscore -= 5;
+				ccorrect += 0;
+				cerror += 1;
+				
+				score.innerHTML = '\n\t\t\t\t<h2>Score : ' + cscore + '</h2>\n\t\t\t';
+				correct.innerHTML = '\n\t\t\t\t<h2>Correct : ' + ccorrect + '</h2>\n\t\t\t';
+				error.innerHTML = '\n\t\t\t\t<h2>Error : ' + cerror + '</h2>\n\t\t\t';
+				
+				shuffle(blocks);
+				  
+				blocks[0].innerHTML = '\n\t\t\t\t<h2>' + correct_num + '</h2>\n\t\t\t';
+				  
+				let d4 = correct_num.toString()[0];
+				let d3 = correct_num.toString()[1];
+				let d2 = correct_num.toString()[2];
+				let d1 = correct_num.toString()[3];
+				
+				let id = 1;
+
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 + 
+							similar[parseInt(d2)][i] +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							similar[parseInt(d3)][i] +
+							d2 +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 2; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 +
+							similar[parseInt(d2)][i] +
+							similar[parseInt(d1)][i] +
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+			}
+			});
+			
+			block_02.addEventListener("touchstart", e => {
+			  e.preventDefault();
+			  console.log("touchstart event!");
+			});
+			block_02.addEventListener("touchend", e => {
+			  e.preventDefault();
+			  console.log("touchend event!");
+			  if(block_02.innerText == correct_num) {
+				cscore += 5;
+				ccorrect += 1;
+				cerror += 0;
+				
+				score.innerHTML = '\n\t\t\t\t<h2>Score : ' + cscore + '</h2>\n\t\t\t';
+				correct.innerHTML = '\n\t\t\t\t<h2>Correct : ' + ccorrect + '</h2>\n\t\t\t';
+				error.innerHTML = '\n\t\t\t\t<h2>Error : ' + cerror + '</h2>\n\t\t\t';
+				  
+				correct_num = correct_num - 7;
+				shuffle(blocks);
+				  
+				blocks[0].innerHTML = '\n\t\t\t\t<h2>' + correct_num + '</h2>\n\t\t\t';
+				  
+				let d4 = correct_num.toString()[0];
+				let d3 = correct_num.toString()[1];
+				let d2 = correct_num.toString()[2];
+				let d1 = correct_num.toString()[3];
+				
+				let id = 1;
+
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 + 
+							similar[parseInt(d2)][i] +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							similar[parseInt(d3)][i] +
+							d2 +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 2; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 +
+							similar[parseInt(d2)][i] +
+							similar[parseInt(d1)][i] +
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+			}else {
+				cscore -= 5;
+				ccorrect += 0;
+				cerror += 1;
+				
+				score.innerHTML = '\n\t\t\t\t<h2>Score : ' + cscore + '</h2>\n\t\t\t';
+				correct.innerHTML = '\n\t\t\t\t<h2>Correct : ' + ccorrect + '</h2>\n\t\t\t';
+				error.innerHTML = '\n\t\t\t\t<h2>Error : ' + cerror + '</h2>\n\t\t\t';
+				
+				shuffle(blocks);
+				  
+				blocks[0].innerHTML = '\n\t\t\t\t<h2>' + correct_num + '</h2>\n\t\t\t';
+				  
+				let d4 = correct_num.toString()[0];
+				let d3 = correct_num.toString()[1];
+				let d2 = correct_num.toString()[2];
+				let d1 = correct_num.toString()[3];
+				
+				let id = 1;
+
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 + 
+							similar[parseInt(d2)][i] +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							similar[parseInt(d3)][i] +
+							d2 +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 2; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 +
+							similar[parseInt(d2)][i] +
+							similar[parseInt(d1)][i] +
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+			}
+			});
+			
+			block_03.addEventListener("touchstart", e => {
+			  e.preventDefault();
+			  console.log("touchstart event!");
+			});
+			block_03.addEventListener("touchend", e => {
+			  e.preventDefault();
+			  console.log("touchend event!");
+			  if(block_03.innerText == correct_num) {
+				cscore += 5;
+				ccorrect += 1;
+				cerror += 0;
+				
+				score.innerHTML = '\n\t\t\t\t<h2>Score : ' + cscore + '</h2>\n\t\t\t';
+				correct.innerHTML = '\n\t\t\t\t<h2>Correct : ' + ccorrect + '</h2>\n\t\t\t';
+				error.innerHTML = '\n\t\t\t\t<h2>Error : ' + cerror + '</h2>\n\t\t\t';
+				  
+				correct_num = correct_num - 7;
+				shuffle(blocks);
+				  
+				blocks[0].innerHTML = '\n\t\t\t\t<h2>' + correct_num + '</h2>\n\t\t\t';
+				  
+				let d4 = correct_num.toString()[0];
+				let d3 = correct_num.toString()[1];
+				let d2 = correct_num.toString()[2];
+				let d1 = correct_num.toString()[3];
+				
+				let id = 1;
+
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 + 
+							similar[parseInt(d2)][i] +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							similar[parseInt(d3)][i] +
+							d2 +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 2; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 +
+							similar[parseInt(d2)][i] +
+							similar[parseInt(d1)][i] +
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+			}else {
+				cscore -= 5;
+				ccorrect += 0;
+				cerror += 1;
+				
+				score.innerHTML = '\n\t\t\t\t<h2>Score : ' + cscore + '</h2>\n\t\t\t';
+				correct.innerHTML = '\n\t\t\t\t<h2>Correct : ' + ccorrect + '</h2>\n\t\t\t';
+				error.innerHTML = '\n\t\t\t\t<h2>Error : ' + cerror + '</h2>\n\t\t\t';
+				
+				shuffle(blocks);
+				  
+				blocks[0].innerHTML = '\n\t\t\t\t<h2>' + correct_num + '</h2>\n\t\t\t';
+				  
+				let d4 = correct_num.toString()[0];
+				let d3 = correct_num.toString()[1];
+				let d2 = correct_num.toString()[2];
+				let d1 = correct_num.toString()[3];
+				
+				let id = 1;
+
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 + 
+							similar[parseInt(d2)][i] +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							similar[parseInt(d3)][i] +
+							d2 +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 2; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 +
+							similar[parseInt(d2)][i] +
+							similar[parseInt(d1)][i] +
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+			}
+			});
+			
+			block_04.addEventListener("touchstart", e => {
+			  e.preventDefault();
+			  console.log("touchstart event!");
+			});
+			block_04.addEventListener("touchend", e => {
+			  e.preventDefault();
+			  console.log("touchend event!");
+			  if(block_04.innerText == correct_num) {
+				cscore += 5;
+				ccorrect += 1;
+				cerror += 0;
+				
+				score.innerHTML = '\n\t\t\t\t<h2>Score : ' + cscore + '</h2>\n\t\t\t';
+				correct.innerHTML = '\n\t\t\t\t<h2>Correct : ' + ccorrect + '</h2>\n\t\t\t';
+				error.innerHTML = '\n\t\t\t\t<h2>Error : ' + cerror + '</h2>\n\t\t\t';
+				  
+				correct_num = correct_num - 7;
+				shuffle(blocks);
+				  
+				blocks[0].innerHTML = '\n\t\t\t\t<h2>' + correct_num + '</h2>\n\t\t\t';
+				let d4 = correct_num.toString()[0];
+				let d3 = correct_num.toString()[1];
+				let d2 = correct_num.toString()[2];
+				let d1 = correct_num.toString()[3];
+				
+				let id = 1;
+
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 + 
+							similar[parseInt(d2)][i] +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							similar[parseInt(d3)][i] +
+							d2 +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 2; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 +
+							similar[parseInt(d2)][i] +
+							similar[parseInt(d1)][i] +
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+			}else {
+				cscore -= 5;
+				ccorrect += 0;
+				cerror += 1;
+				
+				score.innerHTML = '\n\t\t\t\t<h2>Score : ' + cscore + '</h2>\n\t\t\t';
+				correct.innerHTML = '\n\t\t\t\t<h2>Correct : ' + ccorrect + '</h2>\n\t\t\t';
+				error.innerHTML = '\n\t\t\t\t<h2>Error : ' + cerror + '</h2>\n\t\t\t';
+				
+				shuffle(blocks);
+				  
+				blocks[0].innerHTML = '\n\t\t\t\t<h2>' + correct_num + '</h2>\n\t\t\t';
+				  
+				let d4 = correct_num.toString()[0];
+				let d3 = correct_num.toString()[1];
+				let d2 = correct_num.toString()[2];
+				let d1 = correct_num.toString()[3];
+				
+				let id = 1;
+
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 + 
+							similar[parseInt(d2)][i] +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							similar[parseInt(d3)][i] +
+							d2 +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 2; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 +
+							similar[parseInt(d2)][i] +
+							similar[parseInt(d1)][i] +
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+			}
+			});
+			
+			block_05.addEventListener("touchstart", e => {
+			  e.preventDefault();
+			  console.log("touchstart event!");
+			});
+			block_05.addEventListener("touchend", e => {
+			  e.preventDefault();
+			  console.log("touchend event!");
+			  if(block_05.innerText == correct_num) {
+				cscore += 5;
+				ccorrect += 1;
+				cerror += 0;
+				
+				score.innerHTML = '\n\t\t\t\t<h2>Score : ' + cscore + '</h2>\n\t\t\t';
+				correct.innerHTML = '\n\t\t\t\t<h2>Correct : ' + ccorrect + '</h2>\n\t\t\t';
+				error.innerHTML = '\n\t\t\t\t<h2>Error : ' + cerror + '</h2>\n\t\t\t';
+				  
+				correct_num = correct_num - 7;
+				shuffle(blocks);
+				  
+				blocks[0].innerHTML = '\n\t\t\t\t<h2>' + correct_num + '</h2>\n\t\t\t';
+				  
+				let d4 = correct_num.toString()[0];
+				let d3 = correct_num.toString()[1];
+				let d2 = correct_num.toString()[2];
+				let d1 = correct_num.toString()[3];
+				
+				let id = 1;
+
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 + 
+							similar[parseInt(d2)][i] +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							similar[parseInt(d3)][i] +
+							d2 +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 2; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 +
+							similar[parseInt(d2)][i] +
+							similar[parseInt(d1)][i] +
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+			}else {
+				cscore -= 5;
+				ccorrect += 0;
+				cerror += 1;
+				
+				score.innerHTML = '\n\t\t\t\t<h2>Score : ' + cscore + '</h2>\n\t\t\t';
+				correct.innerHTML = '\n\t\t\t\t<h2>Correct : ' + ccorrect + '</h2>\n\t\t\t';
+				error.innerHTML = '\n\t\t\t\t<h2>Error : ' + cerror + '</h2>\n\t\t\t';
+				
+				shuffle(blocks);
+				  
+				blocks[0].innerHTML = '\n\t\t\t\t<h2>' + correct_num + '</h2>\n\t\t\t';
+				  
+				let d4 = correct_num.toString()[0];
+				let d3 = correct_num.toString()[1];
+				let d2 = correct_num.toString()[2];
+				let d1 = correct_num.toString()[3];
+				
+				let id = 1;
+
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 + 
+							similar[parseInt(d2)][i] +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							similar[parseInt(d3)][i] +
+							d2 +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 2; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 +
+							similar[parseInt(d2)][i] +
+							similar[parseInt(d1)][i] +
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+			}
+			});
+			
+			block_06.addEventListener("touchstart", e => {
+			  e.preventDefault();
+			  console.log("touchstart event!");
+			});
+			block_06.addEventListener("touchend", e => {
+			  e.preventDefault();
+			  console.log("touchend event!");
+			  if(block_06.innerText == correct_num) {
+				cscore += 5;
+				ccorrect += 1;
+				cerror += 0;
+				
+				score.innerHTML = '\n\t\t\t\t<h2>Score : ' + cscore + '</h2>\n\t\t\t';
+				correct.innerHTML = '\n\t\t\t\t<h2>Correct : ' + ccorrect + '</h2>\n\t\t\t';
+				error.innerHTML = '\n\t\t\t\t<h2>Error : ' + cerror + '</h2>\n\t\t\t';
+				  
+				correct_num = correct_num - 7;
+				shuffle(blocks);
+				  
+				blocks[0].innerHTML = '\n\t\t\t\t<h2>' + correct_num + '</h2>\n\t\t\t';
+				  
+				let d4 = correct_num.toString()[0];
+				let d3 = correct_num.toString()[1];
+				let d2 = correct_num.toString()[2];
+				let d1 = correct_num.toString()[3];
+				
+				let id = 1;
+
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 + 
+							similar[parseInt(d2)][i] +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							similar[parseInt(d3)][i] +
+							d2 +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 2; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 +
+							similar[parseInt(d2)][i] +
+							similar[parseInt(d1)][i] +
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+			}else {
+				cscore -= 5;
+				ccorrect += 0;
+				cerror += 1;
+				
+				score.innerHTML = '\n\t\t\t\t<h2>Score : ' + cscore + '</h2>\n\t\t\t';
+				correct.innerHTML = '\n\t\t\t\t<h2>Correct : ' + ccorrect + '</h2>\n\t\t\t';
+				error.innerHTML = '\n\t\t\t\t<h2>Error : ' + cerror + '</h2>\n\t\t\t';
+				
+				shuffle(blocks);
+				  
+				blocks[0].innerHTML = '\n\t\t\t\t<h2>' + correct_num + '</h2>\n\t\t\t';
+				  
+				let d4 = correct_num.toString()[0];
+				let d3 = correct_num.toString()[1];
+				let d2 = correct_num.toString()[2];
+				let d1 = correct_num.toString()[3];
+				
+				let id = 1;
+
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 + 
+							similar[parseInt(d2)][i] +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							similar[parseInt(d3)][i] +
+							d2 +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 2; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 +
+							similar[parseInt(d2)][i] +
+							similar[parseInt(d1)][i] +
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+			}
+			});
+			
+			block_07.addEventListener("touchstart", e => {
+			  e.preventDefault();
+			  console.log("touchstart event!");
+			});
+			block_07.addEventListener("touchend", e => {
+			  e.preventDefault();
+			  console.log("touchend event!");
+			  if(block_07.innerText == correct_num) {
+				cscore += 5;
+				ccorrect += 1;
+				cerror += 0;
+				
+				score.innerHTML = '\n\t\t\t\t<h2>Score : ' + cscore + '</h2>\n\t\t\t';
+				correct.innerHTML = '\n\t\t\t\t<h2>Correct : ' + ccorrect + '</h2>\n\t\t\t';
+				error.innerHTML = '\n\t\t\t\t<h2>Error : ' + cerror + '</h2>\n\t\t\t';
+				  
+				correct_num = correct_num - 7;
+				shuffle(blocks);
+				  
+				blocks[0].innerHTML = '\n\t\t\t\t<h2>' + correct_num + '</h2>\n\t\t\t';
+				  
+				let d4 = correct_num.toString()[0];
+				let d3 = correct_num.toString()[1];
+				let d2 = correct_num.toString()[2];
+				let d1 = correct_num.toString()[3];
+				
+				let id = 1;
+
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 + 
+							similar[parseInt(d2)][i] +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							similar[parseInt(d3)][i] +
+							d2 +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 2; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 +
+							similar[parseInt(d2)][i] +
+							similar[parseInt(d1)][i] +
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+			}else {
+				cscore -= 5;
+				ccorrect += 0;
+				cerror += 1;
+				
+				score.innerHTML = '\n\t\t\t\t<h2>Score : ' + cscore + '</h2>\n\t\t\t';
+				correct.innerHTML = '\n\t\t\t\t<h2>Correct : ' + ccorrect + '</h2>\n\t\t\t';
+				error.innerHTML = '\n\t\t\t\t<h2>Error : ' + cerror + '</h2>\n\t\t\t';
+				
+				shuffle(blocks);
+				  
+				blocks[0].innerHTML = '\n\t\t\t\t<h2>' + correct_num + '</h2>\n\t\t\t';
+				  
+				let d4 = correct_num.toString()[0];
+				let d3 = correct_num.toString()[1];
+				let d2 = correct_num.toString()[2];
+				let d1 = correct_num.toString()[3];
+				
+				let id = 1;
+
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 + 
+							similar[parseInt(d2)][i] +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							similar[parseInt(d3)][i] +
+							d2 +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 2; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 +
+							similar[parseInt(d2)][i] +
+							similar[parseInt(d1)][i] +
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+			}
+			});
+			
+			block_08.addEventListener("touchstart", e => {
+			  e.preventDefault();
+			  console.log("touchstart event!");
+			});
+			block_08.addEventListener("touchend", e => {
+			  e.preventDefault();
+			  console.log("touchend event!");
+			  if(block_08.innerText == correct_num) {
+				cscore += 5;
+				ccorrect += 1;
+				cerror += 0;
+				
+				score.innerHTML = '\n\t\t\t\t<h2>Score : ' + cscore + '</h2>\n\t\t\t';
+				correct.innerHTML = '\n\t\t\t\t<h2>Correct : ' + ccorrect + '</h2>\n\t\t\t';
+				error.innerHTML = '\n\t\t\t\t<h2>Error : ' + cerror + '</h2>\n\t\t\t';
+				  
+				correct_num = correct_num - 7;
+				shuffle(blocks);
+				  
+				blocks[0].innerHTML = '\n\t\t\t\t<h2>' + correct_num + '</h2>\n\t\t\t';
+				  
+				let d4 = correct_num.toString()[0];
+				let d3 = correct_num.toString()[1];
+				let d2 = correct_num.toString()[2];
+				let d1 = correct_num.toString()[3];
+				
+				let id = 1;
+
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 + 
+							similar[parseInt(d2)][i] +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							similar[parseInt(d3)][i] +
+							d2 +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 2; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 +
+							similar[parseInt(d2)][i] +
+							similar[parseInt(d1)][i] +
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+			}else {
+				cscore -= 5;
+				ccorrect += 0;
+				cerror += 1;
+				
+				score.innerHTML = '\n\t\t\t\t<h2>Score : ' + cscore + '</h2>\n\t\t\t';
+				correct.innerHTML = '\n\t\t\t\t<h2>Correct : ' + ccorrect + '</h2>\n\t\t\t';
+				error.innerHTML = '\n\t\t\t\t<h2>Error : ' + cerror + '</h2>\n\t\t\t';
+				
+				shuffle(blocks);
+				  
+				blocks[0].innerHTML = '\n\t\t\t\t<h2>' + correct_num + '</h2>\n\t\t\t';
+				  
+				let d4 = correct_num.toString()[0];
+				let d3 = correct_num.toString()[1];
+				let d2 = correct_num.toString()[2];
+				let d1 = correct_num.toString()[3];
+				
+				let id = 1;
+
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 + 
+							similar[parseInt(d2)][i] +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							similar[parseInt(d3)][i] +
+							d2 +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 2; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 +
+							similar[parseInt(d2)][i] +
+							similar[parseInt(d1)][i] +
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+			}
+			});
+			
+			block_09.addEventListener("touchstart", e => {
+			  e.preventDefault();
+			  console.log("touchstart event!");
+			});
+			block_09.addEventListener("touchend", e => {
+			  e.preventDefault();
+			  console.log("touchend event!");
+			  if(block_09.innerText == correct_num) {
+				cscore += 5;
+				ccorrect += 1;
+				cerror += 0;
+				
+				score.innerHTML = '\n\t\t\t\t<h2>Score : ' + cscore + '</h2>\n\t\t\t';
+				correct.innerHTML = '\n\t\t\t\t<h2>Correct : ' + ccorrect + '</h2>\n\t\t\t';
+				error.innerHTML = '\n\t\t\t\t<h2>Error : ' + cerror + '</h2>\n\t\t\t';
+				  
+				correct_num = correct_num - 7;
+				shuffle(blocks);
+				  
+				blocks[0].innerHTML = '\n\t\t\t\t<h2>' + correct_num + '</h2>\n\t\t\t';
+				  
+				let d4 = correct_num.toString()[0];
+				let d3 = correct_num.toString()[1];
+				let d2 = correct_num.toString()[2];
+				let d1 = correct_num.toString()[3];
+				
+				let id = 1;
+
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 + 
+							similar[parseInt(d2)][i] +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							similar[parseInt(d3)][i] +
+							d2 +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 2; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 +
+							similar[parseInt(d2)][i] +
+							similar[parseInt(d1)][i] +
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+			}else {
+				cscore -= 5;
+				ccorrect += 0;
+				cerror += 1;
+				
+				score.innerHTML = '\n\t\t\t\t<h2>Score : ' + cscore + '</h2>\n\t\t\t';
+				correct.innerHTML = '\n\t\t\t\t<h2>Correct : ' + ccorrect + '</h2>\n\t\t\t';
+				error.innerHTML = '\n\t\t\t\t<h2>Error : ' + cerror + '</h2>\n\t\t\t';
+				
+				shuffle(blocks);
+				  
+				blocks[0].innerHTML = '\n\t\t\t\t<h2>' + correct_num + '</h2>\n\t\t\t';
+				  
+				let d4 = correct_num.toString()[0];
+				let d3 = correct_num.toString()[1];
+				let d2 = correct_num.toString()[2];
+				let d1 = correct_num.toString()[3];
+				
+				let id = 1;
+
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 + 
+							similar[parseInt(d2)][i] +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 3; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							similar[parseInt(d3)][i] +
+							d2 +
+							d1 + 
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+				
+				for(let i = 0; i < 2; i++) {
+					blocks[id].innerHTML = 
+						'\n\t\t\t\t<h2>' + 
+							d4 + 
+							d3 +
+							similar[parseInt(d2)][i] +
+							similar[parseInt(d1)][i] +
+						'</h2>\n\t\t\t';
+					
+					blocks[id].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+					id ++;
+				}
+			}
+			});
+		</script>
+		
+		<script>
+			window.alert("初始值為: " + initial_num);
+			
+			
+			function shuffle(array) {
+			  let currentIndex = array.length,  randomIndex;
+			
+			  // While there remain elements to shuffle.
+			  while (currentIndex > 0) {
+			
+			    // Pick a remaining element.
+			    randomIndex = Math.floor(Math.random() * currentIndex);
+			    currentIndex--;
+			
+			    // And swap it with the current element.
+			    [array[currentIndex], array[randomIndex]] = [
+			      array[randomIndex], array[currentIndex]];
+			  }
+			  return array;
+			}
+			
+			shuffle(blocks);
+			
+			blocks[0].innerHTML = '\n\t\t\t\t<h2>' + initial_num + '</h2>\n\t\t\t';
+			
+			let digit_4 = correct_num.toString()[0];
+			let digit_3 = correct_num.toString()[1];
+			let digit_2 = correct_num.toString()[2];
+			let digit_1 = correct_num.toString()[3];
+			
+			let similar = [
+				[8, 6, 3], 
+				[7, 4, 3], 
+				[5, 7, 3], 
+				[8, 9, 5], 
+				[9, 7, 1], 
+				[6, 2, 9], 
+				[8, 5, 9], 
+				[1, 2, 4], 
+				[0, 3, 6], 
+				[4, 6, 8]
+			];
+			
+			let idx = 1;
+
+			for(let i = 0; i < 3; i++) {
+				blocks[idx].innerHTML = 
+					'\n\t\t\t\t<h2>' + 
+						digit_4 + 
+						digit_3 + 
+						similar[parseInt(digit_2)][i] +
+						digit_1 + 
+					'</h2>\n\t\t\t';
+				
+				blocks[idx].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+				idx ++;
+			}
+			
+			for(let i = 0; i < 3; i++) {
+				blocks[idx].innerHTML = 
+					'\n\t\t\t\t<h2>' + 
+						digit_4 + 
+						similar[parseInt(digit_3)][i] +
+						digit_2 +
+						digit_1 + 
+					'</h2>\n\t\t\t';
+				
+				blocks[idx].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+				idx ++;
+			}
+			
+			for(let i = 0; i < 2; i++) {
+				blocks[idx].innerHTML = 
+					'\n\t\t\t\t<h2>' + 
+						digit_4 + 
+						digit_3 +
+						similar[parseInt(digit_2)][i] +
+						similar[parseInt(digit_1)][i] +
+					'</h2>\n\t\t\t';
+				
+				blocks[idx].style.fontSize = parseInt(Math.random()*20 + 8) + "px";
+				idx ++;
+			}
+			
+		</script>
+    </body>
+</html>

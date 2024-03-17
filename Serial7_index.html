@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+    <head>
+        <meta charset="utf-8">
+        <title>Serial7</title>
+        <meta name="description" content="專注力測驗">
+        <link rel="icon" type="image/png" href="images/fall.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
+        <link href="css/Serial7_style.css" rel="stylesheet">
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Ojuju:wght@200..800&display=swap" rel="stylesheet">
+    </head>
+
+    <body class="index-big-bg">
+        <div class="button" id="sbtn">
+			<h2>START</h2>
+		</div>
+		<script>
+			let sbtn = document.getElementById("sbtn");
+			sbtn.addEventListener("touchstart", e => {
+			  e.preventDefault();
+			  console.log("touchstart event!");
+			});
+			
+			sbtn.addEventListener("touchend", e => {
+			  e.preventDefault();
+			  console.log("touchend event!");
+			  //window.alert("http://" + location.host + "/Serial7_game");
+			  location.assign("Serial7_game.html");
+			});
+		</script>
+    </body>
+</html>
