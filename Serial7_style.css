@@ -1,0 +1,535 @@
+@charset "UTF-8";
+
+html {
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+	.index-big-bg {
+		position: relative;
+	    font-family: "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro W3", sans-serif;
+	    line-height: 1.7;
+	    color: rgb(40, 35, 32);
+	    background-color: black;
+	    height: 100vh;
+	    position: relative;
+	    background-image: url(../images/focus2.png);
+	    background-position: center top;
+	    background-repeat: no-repeat;
+	    background-size: cover;
+	    -webkit-background-size: cover;
+	}
+	
+	.button {
+		transition: .3s;
+		background-color: rgb(0, 0, 0, 0.75);
+		display: block;
+		position: fixed;
+		width: 350px;
+		height: 80px;
+		left: 50vw;
+		margin-left: -175px;
+		top: 36vh;
+		border-radius: 50px;
+	}
+	
+	.button h2 {
+		font-family: "Caveat", sans-serif;
+		font-optical-sizing: auto;
+		font-weight: 500;
+		font-style: normal;
+		text-align: center;
+		color: rgb(255, 255, 255);
+		margin-top: 2.4%;
+		font-size: 36px;
+	}
+	
+	.button:active {
+		transition: 0.1s;
+		background-color: rgb(0, 0, 0, 0.6);
+		transform: scale(1.05, 1.05);
+	}
+	
+	.game-big-bg {
+		position: relative;
+	    font-family: "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro W3", sans-serif;
+	    line-height: 1.7;
+	    color: rgb(40, 35, 32);
+	    background-color: black;
+	    height: 100vh;
+	    position: relative;
+	    background-image: url(../images/focus3.png);
+	    background-position: center top;
+	    background-repeat: no-repeat;
+	    background-size: cover;
+	    -webkit-background-size: cover;
+	}
+	
+	.game-big-bg .go_back {
+		transition: 0.3s;
+		position:fixed;
+		left: 2.5vw;
+		top: 6%;
+		width: 30%;
+		height: 48px;
+		background-color: rgb(0, 0, 0, 0.75);
+		-webkit-backdrop-filter:blur(3px);
+    	backdrop-filter:blur(3px);
+    	border-radius: 50px;
+    	display: flex;
+    	align-items: center;
+    	padding-bottom: 1%;
+	}
+	
+	.game-big-bg .go_back h2 {
+		font-family: "Caveat", sans-serif;
+		font-optical-sizing: auto;
+		font-weight: 500;
+		font-style: normal;
+		text-align: center;
+		color: rgb(255, 255, 255);
+		font-size: 24px;
+		width: 95%;
+	}
+	
+	.game-big-bg .go_back:active {
+		transition: 0.1s;
+		background-color: rgb(0, 0, 0, 0.5);
+		transform: scale(1.05, 1.05);
+	}
+	
+	#timer {
+		transition: 0.3s;
+		position:fixed;
+		right: 2.5vw;
+		top: 6%;
+		width: 60%;
+		height: 48px;
+		background-color: rgb(0, 0, 0, 0.75);
+		-webkit-backdrop-filter:blur(3px);
+    	backdrop-filter:blur(3px);
+    	border-radius: 50px;
+    	display: flex;
+    	align-items: center;
+	}
+	
+	#timer h2 {
+		font-family: 'Seven Segment', sans-serif;
+		font-optical-sizing: auto;
+		font-weight: 700;
+		font-style: normal;
+		text-align: center;
+		color: rgb(255, 255, 255);
+		font-size: 24px;
+		width: 100%;
+	}
+	
+	#score {
+		transition: 0.3s;
+		position:fixed;
+		left: 6vw;
+		bottom: 8%;
+		width: 42%;
+		height: 48px;
+		background-color: rgb(0, 0, 0, 0.75);
+		-webkit-backdrop-filter:blur(3px);
+    	backdrop-filter:blur(3px);
+    	border-radius: 50px;
+    	display: flex;
+    	align-items: center;
+	}
+	
+	#score h2 {
+		font-family: "Caveat", sans-serif;
+		font-optical-sizing: auto;
+		font-weight: 500;
+		font-style: normal;
+		text-align: center;
+		color: rgb(255, 255, 255);
+		font-size: 24px;
+		width: 95%;
+	}
+	
+	#previous {
+		transition: 0.3s;
+		position:fixed;
+		right: 6vw;
+		bottom: 8%;
+		width: 42%;
+		height: 48px;
+		background-color: rgb(0, 0, 0, 0.75);
+		-webkit-backdrop-filter:blur(3px);
+    	backdrop-filter:blur(3px);
+    	border-radius: 50px;
+    	display: flex;
+    	align-items: center;
+	}
+	
+	#previous h2 {
+		font-family: "Caveat", sans-serif;
+		font-optical-sizing: auto;
+		font-weight: 500;
+		font-style: normal;
+		text-align: center;
+		color: rgb(255, 255, 255);
+		font-size: 24px;
+		width: 95%;
+	}
+	
+	#correct {
+		transition: 0.3s;
+		position:fixed;
+		left: 6vw;
+		bottom: 18%;
+		width: 42%;
+		height: 48px;
+		background-color: rgb(0, 0, 0, 0.75);
+		-webkit-backdrop-filter:blur(3px);
+    	backdrop-filter:blur(3px);
+    	border-radius: 50px;
+    	display: flex;
+    	align-items: center;
+	}
+	
+	#correct h2 {
+		font-family: "Caveat", sans-serif;
+		font-optical-sizing: auto;
+		font-weight: 500;
+		font-style: normal;
+		text-align: center;
+		color: rgb(255, 255, 255);
+		font-size: 24px;
+		width: 95%;
+	}
+	
+	#error {
+		transition: 0.3s;
+		position:fixed;
+		right: 6vw;
+		bottom: 18%;
+		width: 42%;
+		height: 48px;
+		background-color: rgb(0, 0, 0, 0.75);
+		-webkit-backdrop-filter:blur(3px);
+    	backdrop-filter:blur(3px);
+    	border-radius: 50px;
+    	display: flex;
+    	align-items: center;
+	}
+	
+	#error h2 {
+		font-family: "Caveat", sans-serif;
+		font-optical-sizing: auto;
+		font-weight: 500;
+		font-style: normal;
+		text-align: center;
+		color: rgb(255, 255, 255);
+		font-size: 24px;
+		width: 95%;
+	}
+	
+	#block_frame {
+		position: fixed;
+		background-color: rgb(0, 0, 0, 0.75);
+		width: 95vw;
+		height: 95vw;
+		left: 2.5vw;
+		top: 16%;
+		border-radius: 12px;
+		-webkit-backdrop-filter:blur(3px);
+    	backdrop-filter:blur(3px);
+	}
+	
+	#block_01 {
+		transition: 0.3s;
+		position: absolute;
+		width: 24%;
+		height: 24%;
+		background-color: rgb(255, 255, 255, 0.1);
+		box-shadow: 0 0 16px rgb(0, 0, 0, 0.5);
+		top: 8%;
+		left: 8%;
+		border-radius: 20px;
+		-webkit-backdrop-filter:blur(3px);
+    	backdrop-filter:blur(3px);
+    	font-family: 'Seven Segment', sans-serif;
+		font-size: 16px;
+    	display: flex;
+    	align-items: center;
+	}
+	
+	#block_01 h2 {
+		width: 100%;
+		color: rgb(255, 255, 255);
+		text-shadow: 0 0 1px rgb(255, 255, 255);
+		text-align: center;
+		
+	}
+	
+	#block_01:active {
+		transition: 0.1s;
+		background-color: rgb(255, 255, 255, 0.3);
+		transform: scale(1.05, 1.05);
+	}
+	
+	#block_02 {
+		transition: 0.3s;
+		position: absolute;
+		width: 24%;
+		height: 24%;
+		background-color: rgb(255, 255, 255, 0.1);
+		box-shadow: 0 0 16px rgb(0, 0, 0, 0.5);
+		top: 8%;
+		left: 38%;
+		border-radius: 20px;
+		-webkit-backdrop-filter:blur(3px);
+    	backdrop-filter:blur(3px);
+    	font-family: 'Seven Segment', sans-serif;
+    	font-size: 16px;
+    	display: flex;
+    	align-items: center;
+	}
+	
+	#block_02 h2 {
+		width: 100%;
+		color: rgb(255, 255, 255);
+		text-shadow: 0 0 1px rgb(255, 255, 255);
+		text-align: center;
+		
+	}
+	
+	#block_02:active {
+		transition: 0.1s;
+		background-color: rgb(255, 255, 255, 0.3);
+		transform: scale(1.05, 1.05);
+	}
+	
+	#block_03 {
+		transition: 0.3s;
+		position: absolute;
+		width: 24%;
+		height: 24%;
+		background-color: rgb(255, 255, 255, 0.1);
+		box-shadow: 0 0 16px rgb(0, 0, 0, 0.5);
+		top: 8%;
+		left: 68%;
+		border-radius: 20px;
+		-webkit-backdrop-filter:blur(3px);
+    	backdrop-filter:blur(3px);
+    	font-family: 'Seven Segment', sans-serif;
+    	font-size: 16px;
+    	display: flex;
+    	align-items: center;
+	}
+	
+	#block_03 h2 {
+		width: 100%;
+		color: rgb(255, 255, 255);
+		text-shadow: 0 0 1px rgb(255, 255, 255);
+		text-align: center;
+		
+	}
+	
+	#block_03:active {
+		transition: 0.1s;
+		background-color: rgb(255, 255, 255, 0.3);
+		transform: scale(1.05, 1.05);
+	}
+	
+	#block_04 {
+		transition: 0.3s;
+		position: absolute;
+		width: 24%;
+		height: 24%;
+		background-color: rgb(255, 255, 255, 0.1);
+		box-shadow: 0 0 16px rgb(0, 0, 0, 0.5);
+		top: 38%;
+		left: 8%;
+		border-radius: 20px;
+		-webkit-backdrop-filter:blur(3px);
+    	backdrop-filter:blur(3px);
+    	font-family: 'Seven Segment', sans-serif;
+    	font-size: 16px;
+    	display: flex;
+    	align-items: center;
+	}
+	
+	#block_04 h2 {
+		width: 100%;
+		color: rgb(255, 255, 255);
+		text-shadow: 0 0 1px rgb(255, 255, 255);
+		text-align: center;
+		
+	}
+	
+	#block_04:active {
+		transition: 0.1s;
+		background-color: rgb(255, 255, 255, 0.3);
+		transform: scale(1.05, 1.05);
+	}
+	
+	#block_05 {
+		transition: 0.3s;
+		position: absolute;
+		width: 24%;
+		height: 24%;
+		background-color: rgb(255, 255, 255, 0.1);
+		box-shadow: 0 0 16px rgb(0, 0, 0, 0.5);
+		top: 38%;
+		left: 38%;
+		border-radius: 20px;
+		-webkit-backdrop-filter:blur(3px);
+    	backdrop-filter:blur(3px);
+    	font-family: 'Seven Segment', sans-serif;
+    	font-size: 16px;
+    	display: flex;
+    	align-items: center;
+	}
+	
+	#block_05 h2 {
+		width: 100%;
+		color: rgb(255, 255, 255);
+		text-shadow: 0 0 1px rgb(255, 255, 255);
+		text-align: center;
+		
+	}
+	
+	#block_05:active {
+		transition: 0.1s;
+		background-color: rgb(255, 255, 255, 0.3);
+		transform: scale(1.05, 1.05);
+	}
+	
+	#block_06 {
+		transition: 0.3s;
+		position: absolute;
+		width: 24%;
+		height: 24%;
+		background-color: rgb(255, 255, 255, 0.1);
+		box-shadow: 0 0 16px rgb(0, 0, 0, 0.5);
+		top: 38%;
+		left: 68%;
+		border-radius: 20px;
+		-webkit-backdrop-filter:blur(3px);
+    	backdrop-filter:blur(3px);
+    	font-family: 'Seven Segment', sans-serif;
+    	font-size: 16px;
+    	display: flex;
+    	align-items: center;
+	}
+	
+	#block_06 h2 {
+		width: 100%;
+		color: rgb(255, 255, 255);
+		text-shadow: 0 0 1px rgb(255, 255, 255);
+		text-align: center;
+		
+	}
+	
+	#block_06:active {
+		transition: 0.1s;
+		background-color: rgb(255, 255, 255, 0.3);
+		transform: scale(1.05, 1.05);
+	}
+	
+	#block_07 {
+		transition: 0.3s;
+		position: absolute;
+		width: 24%;
+		height: 24%;
+		background-color: rgb(255, 255, 255, 0.1);
+		box-shadow: 0 0 16px rgb(0, 0, 0, 0.5);
+		top: 68%;
+		left: 8%;
+		border-radius: 20px;
+		-webkit-backdrop-filter:blur(3px);
+    	backdrop-filter:blur(3px);
+    	font-family: 'Seven Segment', sans-serif;
+    	font-size: 16px;
+    	display: flex;
+    	align-items: center;
+	}
+	
+	#block_07 h2 {
+		width: 100%;
+		color: rgb(255, 255, 255);
+		text-shadow: 0 0 1px rgb(255, 255, 255);
+		text-align: center;
+		
+	}
+	
+	#block_07:active {
+		transition: 0.1s;
+		background-color: rgb(255, 255, 255, 0.3);
+		transform: scale(1.05, 1.05);
+	}
+	
+	#block_08 {
+		transition: 0.3s;
+		position: absolute;
+		width: 24%;
+		height: 24%;
+		background-color: rgb(255, 255, 255, 0.1);
+		box-shadow: 0 0 16px rgb(0, 0, 0, 0.5);
+		top: 68%;
+		left: 38%;
+		border-radius: 20px;
+		-webkit-backdrop-filter:blur(3px);
+    	backdrop-filter:blur(3px);
+    	font-family: 'Seven Segment', sans-serif;
+    	font-size: 16px;
+    	display: flex;
+    	align-items: center;
+	}
+	
+	#block_08 h2 {
+		width: 100%;
+		color: rgb(255, 255, 255);
+		text-shadow: 0 0 1px rgb(255, 255, 255);
+		text-align: center;
+		
+	}
+	
+	#block_08:active {
+		transition: 0.1s;
+		background-color: rgb(255, 255, 255, 0.3);
+		transform: scale(1.05, 1.05);
+	}
+	
+	#block_09 {
+		transition: 0.3s;
+		position: absolute;
+		width: 24%;
+		height: 24%;
+		background-color: rgb(255, 255, 255, 0.1);
+		box-shadow: 0 0 16px rgb(0, 0, 0, 0.5);
+		top: 68%;
+		left: 68%;
+		border-radius: 20px;
+		-webkit-backdrop-filter:blur(3px);
+    	backdrop-filter:blur(3px);
+    	font-family: 'Seven Segment', sans-serif;
+    	font-size: 16px;
+    	display: flex;
+    	align-items: center;
+	}
+	
+	#block_09 h2 {
+		width: 100%;
+		color: rgb(255, 255, 255);
+		text-shadow: 0 0 1px rgb(255, 255, 255);
+		text-align: center;
+		
+	}
+	
+	#block_09:active {
+		transition: 0.1s;
+		background-color: rgb(255, 255, 255, 0.3);
+		transform: scale(1.05, 1.05);
+	}
+}
+
