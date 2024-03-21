@@ -131,9 +131,9 @@ a {
 	#score {
 		transition: 0.3s;
 		position:fixed;
-		left: 25vw;
+		left: 6vw;
 		bottom: 8%;
-		width: 50%;
+		width: 42%;
 		height: 48px;
 		background-color: rgb(0, 0, 0, 0.75);
 		-webkit-backdrop-filter:blur(3px);
@@ -144,6 +144,32 @@ a {
 	}
 	
 	#score h2 {
+		font-family: "Caveat", sans-serif;
+		font-optical-sizing: auto;
+		font-weight: 500;
+		font-style: normal;
+		text-align: center;
+		color: rgb(255, 255, 255);
+		font-size: 24px;
+		width: 95%;
+	}
+	
+	#previous {
+		transition: 0.3s;
+		position:fixed;
+		right: 6vw;
+		bottom: 8%;
+		width: 42%;
+		height: 48px;
+		background-color: rgb(0, 0, 0, 0.75);
+		-webkit-backdrop-filter:blur(3px);
+    	backdrop-filter:blur(3px);
+    	border-radius: 50px;
+    	display: flex;
+    	align-items: center;
+	}
+	
+	#previous h2 {
 		font-family: "Caveat", sans-serif;
 		font-optical-sizing: auto;
 		font-weight: 500;
@@ -506,4 +532,3 @@ a {
 		transform: scale(1.05, 1.05);
 	}
 }
-
