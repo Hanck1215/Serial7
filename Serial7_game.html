@@ -110,6 +110,10 @@
 			<h2>Score : 0</h2>
 		</div>
 		
+		<div id="previous">
+			<h2>Previous : ?</h2>
+		</div>
+		
 		<div id="correct">
 			<h2>Correct : 0</h2>
 		</div>
@@ -122,8 +126,14 @@
 			let score = document.getElementById("score");
 			let correct = document.getElementById("correct");
 			let error = document.getElementById("error");
+			let previous = document.getElementById("previous");
 			
 			score.addEventListener("touchstart", e => {
+			  e.preventDefault();
+			  console.log("touchstart event!");
+			});
+			
+			previous.addEventListener("touchstart", e => {
 			  e.preventDefault();
 			  console.log("touchstart event!");
 			});
@@ -169,6 +179,7 @@
 			block_01.addEventListener("touchend", e => {
 			  e.preventDefault();
 			  console.log("touchend event!");
+			
 			  if(block_01.innerText == correct_num) {
 				cscore += 5;
 				ccorrect += 1;
@@ -287,6 +298,13 @@
 					id ++;
 				}
 			}
+			
+			if(correct_num != initial_num) {
+				previous.innerHTML = '\n\t\t\t\t<h2>Previous : ' + (correct_num + 7) + '</h2>\n\t\t\t';
+			}else {
+				previous.innerHTML = '\n\t\t\t\t<h2>Previous : ?</h2>\n\t\t\t';
+			}
+			  
 			});
 			
 			block_02.addEventListener("touchstart", e => {
@@ -414,6 +432,13 @@
 					id ++;
 				}
 			}
+			
+			if(correct_num != initial_num) {
+				previous.innerHTML = '\n\t\t\t\t<h2>Previous : ' + (correct_num + 7) + '</h2>\n\t\t\t';
+			}else {
+				previous.innerHTML = '\n\t\t\t\t<h2>Previous : ?</h2>\n\t\t\t';
+			}
+			
 			});
 			
 			block_03.addEventListener("touchstart", e => {
@@ -541,6 +566,13 @@
 					id ++;
 				}
 			}
+			
+			if(correct_num != initial_num) {
+				previous.innerHTML = '\n\t\t\t\t<h2>Previous : ' + (correct_num + 7) + '</h2>\n\t\t\t';
+			}else {
+				previous.innerHTML = '\n\t\t\t\t<h2>Previous : ?</h2>\n\t\t\t';
+			}
+			
 			});
 			
 			block_04.addEventListener("touchstart", e => {
@@ -667,6 +699,13 @@
 					id ++;
 				}
 			}
+			
+			if(correct_num != initial_num) {
+				previous.innerHTML = '\n\t\t\t\t<h2>Previous : ' + (correct_num + 7) + '</h2>\n\t\t\t';
+			}else {
+				previous.innerHTML = '\n\t\t\t\t<h2>Previous : ?</h2>\n\t\t\t';
+			}
+			
 			});
 			
 			block_05.addEventListener("touchstart", e => {
@@ -794,6 +833,13 @@
 					id ++;
 				}
 			}
+			
+			if(correct_num != initial_num) {
+				previous.innerHTML = '\n\t\t\t\t<h2>Previous : ' + (correct_num + 7) + '</h2>\n\t\t\t';
+			}else {
+				previous.innerHTML = '\n\t\t\t\t<h2>Previous : ?</h2>\n\t\t\t';
+			}
+			
 			});
 			
 			block_06.addEventListener("touchstart", e => {
@@ -921,6 +967,13 @@
 					id ++;
 				}
 			}
+			
+			if(correct_num != initial_num) {
+				previous.innerHTML = '\n\t\t\t\t<h2>Previous : ' + (correct_num + 7) + '</h2>\n\t\t\t';
+			}else {
+				previous.innerHTML = '\n\t\t\t\t<h2>Previous : ?</h2>\n\t\t\t';
+			}
+			
 			});
 			
 			block_07.addEventListener("touchstart", e => {
@@ -1048,6 +1101,13 @@
 					id ++;
 				}
 			}
+			
+			if(correct_num != initial_num) {
+				previous.innerHTML = '\n\t\t\t\t<h2>Previous : ' + (correct_num + 7) + '</h2>\n\t\t\t';
+			}else {
+				previous.innerHTML = '\n\t\t\t\t<h2>Previous : ?</h2>\n\t\t\t';
+			}
+			
 			});
 			
 			block_08.addEventListener("touchstart", e => {
@@ -1175,6 +1235,13 @@
 					id ++;
 				}
 			}
+			
+			if(correct_num != initial_num) {
+				previous.innerHTML = '\n\t\t\t\t<h2>Previous : ' + (correct_num + 7) + '</h2>\n\t\t\t';
+			}else {
+				previous.innerHTML = '\n\t\t\t\t<h2>Previous : ?</h2>\n\t\t\t';
+			}
+			
 			});
 			
 			block_09.addEventListener("touchstart", e => {
@@ -1302,6 +1369,13 @@
 					id ++;
 				}
 			}
+			
+			if(correct_num != initial_num) {
+				previous.innerHTML = '\n\t\t\t\t<h2>Previous : ' + (correct_num + 7) + '</h2>\n\t\t\t';
+			}else {
+				previous.innerHTML = '\n\t\t\t\t<h2>Previous : ?</h2>\n\t\t\t';
+			}
+			
 			});
 		</script>
 		
